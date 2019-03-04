@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Text;
 using System.Threading.Tasks;
 using Alexandria.Model;
 using Alexandria.Model.DTO;
@@ -12,7 +15,7 @@ namespace Alexandria.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
+
     public class UserController : ControllerBase
     {
         [HttpPost("login")]
@@ -35,8 +38,10 @@ namespace Alexandria.API.Controllers
 
 
         }
+
         [HttpPost("signup")]
-        public IActionResult SignUpUser([FromBody]User user) {
+        public IActionResult SignUpUser([FromBody]User user)
+        {
 
             try
             {
@@ -44,7 +49,7 @@ namespace Alexandria.API.Controllers
 
                 userservice.AddUser(user);
 
-                    return Ok();                
+                return Ok();
             }
             catch (Exception e)
             {
@@ -52,6 +57,42 @@ namespace Alexandria.API.Controllers
                 throw e;
             }
         }
+        //Em andamento
+        [HttpGet("delete")]
+        public IActionResult DeleteUser([FromBody]User user)
+        {
+            try
+            {
+                UserService userservice = new UserService();
+
+                userservice.RemoveUser(user);
+
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        //teste
+        [HttpPost("email")]
+        public IActionResult SendEmail([FromBody]EmailDTO Email)
+        {
+            try
+            {
+                UserService userservice = new UserService();
+
+                userservice.Email(Email.Email);
+
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
 
     }
 }

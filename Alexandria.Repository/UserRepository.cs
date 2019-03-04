@@ -1,4 +1,5 @@
 ﻿using Alexandria.Model;
+using Alexandria.Model.DTO;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System;
 using System.Collections.Generic;
@@ -6,8 +7,12 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net;
+using System.Net.Mail;
+using System.Net.Mime;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web;
 
 /// <summary>
 /// Responsável pelos funções a serem executadas para CRUD do BD
@@ -17,6 +22,8 @@ namespace Alexandria.Repository
 {
     public class UserRepository : ICRUD<User>
     {
+
+        //Adição de usuário no db
         public void Add(User item)
         {
             using (Context context = new Context())
@@ -27,6 +34,7 @@ namespace Alexandria.Repository
 
         }
 
+        //Método de criptografia para senha
         public string MD5Encrypt(string password) {
 
             string PasswordHash = "P@@Sw0rd";
@@ -55,6 +63,7 @@ namespace Alexandria.Repository
              return Convert.ToBase64String(cipherTextBytes);
 
         }
+        //Método para descriptografar a senha do usuário
         public static string MD5Decrypt(string password)
         {
             string PasswordHash = "P@@Sw0rd";
@@ -75,7 +84,7 @@ namespace Alexandria.Repository
             cryptoStream.Close();
             return Encoding.UTF8.GetString(plainTextBytes, 0, decryptedByteCount).TrimEnd("\0".ToCharArray());
         }
-
+        //Função auxiliar para consultar usuário no db por email e senha
         public User GetUser(string email, string password)
         {
             using (Context context = new Context())
@@ -83,7 +92,7 @@ namespace Alexandria.Repository
                 return context.User.Where(x => x.Email == email && MD5Decrypt(x.Password) == password).FirstOrDefault();
             }    
         }
-
+        //Função auxiliar para pegar email do usuário
         public User GetUserEmail(string email)
         {
             using (Context context = new Context())
@@ -101,7 +110,7 @@ namespace Alexandria.Repository
         //        return context.User.Where(expression).FirstOrDefault();
         //    }
         //}
-
+        //Função para deletar usuário (Não foi implementado ainda, e talvez não seja)
         public void Delete(Guid id)
         {
             var user = GetItem(id);
@@ -115,7 +124,7 @@ namespace Alexandria.Repository
                 }
             }               
         }
-
+        //Função auxiliar para consulta de usuário por ID
         public User GetItem(Guid id)
         {
             using (Context context = new Context())
@@ -150,5 +159,88 @@ namespace Alexandria.Repository
                 }
             }
         }
+        //Função auxiliar para gerar string aleatório (útil)
+        public string RandomString()
+        {
+            StringBuilder builder = new StringBuilder();
+            Random random = new Random();
+            char ch;
+            for (int i = 0; i < 5; i++)
+            {
+                ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
+                builder.Append(ch);
+            }
+           
+            return builder.ToString();
+        }
+        //Função para envio de e-mail
+        public void SendEmail(string email)
+        {
+
+           
+
+            string emailAlex = "alexandriateste1@gmail.com";
+            string passAlex = "Spectro@123";
+            string newPassword = RandomString();
+            var contentID = "Image";
+            var inlineLogo = new Attachment(@"C://Alexandria/Assign.png");
+            string nomeUser = GetUserEmail(email).Name;
+            string htmlBody;
+
+
+            MailMessage mail = new MailMessage();
+
+            mail.IsBodyHtml = true;
+           // mail.Body = CreateBody();
+            
+
+            htmlBody = "<form action=\"http://google.com\">< input type = \"submit\" value = \"Go to Google\" /> </ form > ";
+            mail.From = new MailAddress(emailAlex);
+            mail.To.Add(email); // para
+            mail.Subject = "Alexandria - Nova Senha"; // assunto
+
+            mail.Body = "@C://Users/pedro.missaglia/Desktop/teste.html";
+           // mail.Body = "Olá, " + nomeUser + "<br />" + "Sua nova senha é: " + newPassword;  // mensagem
+            mail.Body += htmlBody;
+            inlineLogo.ContentId = contentID;
+            inlineLogo.ContentDisposition.Inline = true;
+            inlineLogo.ContentDisposition.DispositionType = DispositionTypeNames.Inline;
+            mail.Attachments.Add(inlineLogo);
+            //mail.Body += "<br /><br /><img src=\"cid:" + contentID + "\" height=\"114\" width=\"360\"><br />";
+
+
+            // em caso de anexos
+            // mail.Attachments.Add(new Attachment(@"C:\teste.txt"));
+
+            using (var smtp = new SmtpClient("smtp.gmail.com"))
+            {
+                smtp.EnableSsl = true; // GMail requer SSL
+                smtp.Port = 587;       // porta para SSL
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network; // modo de envio
+                smtp.UseDefaultCredentials = false; // vamos utilizar credencias especificas
+
+                // seu usuário e senha para autenticação
+                smtp.Credentials = new NetworkCredential(emailAlex, passAlex);
+
+                // envia o e-mail
+                smtp.Send(mail);
+
+            }
+        }
+
+        //private string CreateBody()
+        //{
+        //    string body = string.Empty;
+        //    using (StreamReader reader = new StreamReader(Server.MapPath("~/EmailTamplate.html")))
+        //    {
+
+        //        body = reader.ReadToEnd();
+
+        //    }
+
+        //    return body;
+
+        //}
     }
-}
+    }
+
