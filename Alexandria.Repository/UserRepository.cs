@@ -1,18 +1,14 @@
 ﻿using Alexandria.Model;
-using Alexandria.Model.DTO;
-using Microsoft.EntityFrameworkCore.Metadata;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
+
 
 /// <summary>
 /// Responsável pelos funções a serem executadas para CRUD do BD
@@ -153,8 +149,9 @@ namespace Alexandria.Repository
                     user.CPF = item.CPF;
                     user.Email = item.Email;
                     user.Gender = item.Gender;
-                    user.Password = item.Password;
+                    user.Password = MD5Encrypt(item.Password);
 
+                    context.Update(user);
                     context.SaveChanges();
                 }
             }
@@ -177,40 +174,25 @@ namespace Alexandria.Repository
         public void SendEmail(string email)
         {
 
-           
-
             string emailAlex = "alexandriateste1@gmail.com";
             string passAlex = "Spectro@123";
             string newPassword = RandomString();
-            var contentID = "Image";
-            var inlineLogo = new Attachment(@"C://Alexandria/Assign.png");
+            //var contentID = "Image";
+            //var inlineLogo = new Attachment(@"C://Alexandria/Assign.png");
             string nomeUser = GetUserEmail(email).Name;
-            string htmlBody;
-
+            string htmlBody; 
 
             MailMessage mail = new MailMessage();
 
             mail.IsBodyHtml = true;
-           // mail.Body = CreateBody();
+            htmlBody = CreateBody(nomeUser);
             
 
-            htmlBody = "<form action=\"http://google.com\">< input type = \"submit\" value = \"Go to Google\" /> </ form > ";
             mail.From = new MailAddress(emailAlex);
             mail.To.Add(email); // para
             mail.Subject = "Alexandria - Nova Senha"; // assunto
-
-            mail.Body = "@C://Users/pedro.missaglia/Desktop/teste.html";
-           // mail.Body = "Olá, " + nomeUser + "<br />" + "Sua nova senha é: " + newPassword;  // mensagem
             mail.Body += htmlBody;
-            inlineLogo.ContentId = contentID;
-            inlineLogo.ContentDisposition.Inline = true;
-            inlineLogo.ContentDisposition.DispositionType = DispositionTypeNames.Inline;
-            mail.Attachments.Add(inlineLogo);
-            //mail.Body += "<br /><br /><img src=\"cid:" + contentID + "\" height=\"114\" width=\"360\"><br />";
-
-
-            // em caso de anexos
-            // mail.Attachments.Add(new Attachment(@"C:\teste.txt"));
+       
 
             using (var smtp = new SmtpClient("smtp.gmail.com"))
             {
@@ -227,20 +209,21 @@ namespace Alexandria.Repository
 
             }
         }
+        private string CreateBody(string nameUsuario)
+        {
+            string body = string.Empty;
+            using (StreamReader reader = new StreamReader("C://Users/pedro.missaglia/source/repos/PedroMissaglia/Alexandria.API/wwwroot/teste.html"))
+            {
 
-        //private string CreateBody()
-        //{
-        //    string body = string.Empty;
-        //    using (StreamReader reader = new StreamReader(Server.MapPath("~/EmailTamplate.html")))
-        //    {
+                body = reader.ReadToEnd();
 
-        //        body = reader.ReadToEnd();
+            }
+            body = body.Replace("{fname}", nameUsuario);
 
-        //    }
 
-        //    return body;
+            return body;
 
-        //}
+        }
     }
-    }
+}
 

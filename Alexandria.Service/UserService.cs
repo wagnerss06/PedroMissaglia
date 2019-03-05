@@ -30,8 +30,6 @@ namespace Alexandria.Service
 
             return false;
         }
-
-
         public bool Login(string email, string password)
         {
 
@@ -45,7 +43,6 @@ namespace Alexandria.Service
 
             return false;
         }
-
         public void AddUser(User item)
         {
             UserRepository repository = new UserRepository();
@@ -63,7 +60,6 @@ namespace Alexandria.Service
             item.Password = repository.MD5Encrypt(item.Password);
             repository.Add(item);     
         }
-
         public void RemoveUser(User user)
         {
             UserRepository repository = new UserRepository();
@@ -80,7 +76,21 @@ namespace Alexandria.Service
 
             repository.Delete(user.Id);
         }
+        public void UpdateUser(NewPasswordDTO item)
+        {
+            UserRepository repository = new UserRepository();
+            var userEmail = repository.GetUserEmail(item.Email);
 
-        
+            if (userEmail != null && item.New_Password.CompareTo(item.Confirm_Password) == 0)
+            {
+                userEmail.Password = item.Confirm_Password;
+                repository.Update(userEmail.Id, userEmail);
+            }
+            else {
+                throw new Exception("Passwords do not match.");
+            }
+
+        }
+
     }
 }

@@ -74,8 +74,8 @@ namespace Alexandria.API.Controllers
                 throw e;
             }
         }
-        //teste
-        [HttpPost("email")]
+        //Request post para envio de e-mail para troca de senha
+        [HttpPost("forgotPassword")]
         public IActionResult SendEmail([FromBody]EmailDTO Email)
         {
             try
@@ -91,7 +91,23 @@ namespace Alexandria.API.Controllers
                 throw e;
             }
         }
+        [HttpPost("newPassword")]
+        public IActionResult NewPassword([FromBody]NewPasswordDTO item)
+        {
+            try
+            {
+                UserService userservice = new UserService();
 
+                userservice.UpdateUser(item);
+          
+
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
 
 
     }
