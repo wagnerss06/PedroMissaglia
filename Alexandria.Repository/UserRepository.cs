@@ -180,12 +180,13 @@ namespace Alexandria.Repository
             //var contentID = "Image";
             //var inlineLogo = new Attachment(@"C://Alexandria/Assign.png");
             string nomeUser = GetUserEmail(email).Name;
-            string htmlBody; 
+            string htmlBody;
+            string url = "https://localhost:3000/?id="+GetUserEmail(email).Id;
 
             MailMessage mail = new MailMessage();
 
             mail.IsBodyHtml = true;
-            htmlBody = CreateBody(nomeUser);
+            htmlBody = CreateBody(nomeUser, url);
             
 
             mail.From = new MailAddress(emailAlex);
@@ -209,7 +210,7 @@ namespace Alexandria.Repository
 
             }
         }
-        private string CreateBody(string nameUsuario)
+        private string CreateBody(string nameUsuario, string url)
         {
             string body = string.Empty;
             using (StreamReader reader = new StreamReader("C://Users/pedro.missaglia/source/repos/PedroMissaglia/Alexandria.API/wwwroot/teste.html"))
@@ -219,6 +220,7 @@ namespace Alexandria.Repository
 
             }
             body = body.Replace("{fname}", nameUsuario);
+            body = body.Replace("{furl}", url); 
 
 
             return body;
