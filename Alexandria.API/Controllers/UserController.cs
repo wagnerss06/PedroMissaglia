@@ -20,15 +20,20 @@ namespace Alexandria.API.Controllers
     {
         [HttpPost("login")]
         public IActionResult LoginAsCommonUser([FromBody]UserDTO user)
-        {
+        {           
             try
             {
                 UserService userservice = new UserService();
 
-                if (userservice.Login(user.Email, user.Password))
-                    return Ok();
+                int varCond = userservice.Login(user.Email, user.Password);
 
-                return NotFound();
+                if (varCond == 1)
+                    return StatusCode(200);
+                else if (varCond == 2)
+
+                    return StatusCode(412);
+                else
+                    return StatusCode(422);
             }
             catch (Exception e)
             {
