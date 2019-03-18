@@ -13,6 +13,15 @@ namespace Alexandria.Repository
         //Criando tabela User no DB 
         public DbSet<User> User { get; set; }
 
+        //Criando tabela Avatar no DB 
+        public DbSet<User> Avatar { get; set; }
+
+        //Criando tabela Book no DB 
+        public DbSet<Book> Book { get; set; }
+
+        //Criando tabela Bookcase no DB 
+        public DbSet<Bookcase> Bookcase { get; set; }
+
         //Construtores
         public Context(DbContextOptions<Context> options) : base(options)
         {
@@ -25,7 +34,7 @@ namespace Alexandria.Repository
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //String de Conexão do DB
-            optionsBuilder.UseSqlServer(@"Server=SPON5053\SQLEXPRESS;Database=db_alexandria;User Id=sa; Password = totvs@sql@123;");
+            optionsBuilder.UseSqlServer(@"Server=SPON3656;Database=db_alexandria;User Id=sa; Password = Wagner231214!;");
         }
 
 
