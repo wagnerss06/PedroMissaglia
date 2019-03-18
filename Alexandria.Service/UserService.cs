@@ -1,6 +1,7 @@
 ﻿using Alexandria.Model;
 using Alexandria.Model.DTO;
 using Alexandria.Repository;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -28,26 +29,29 @@ namespace Alexandria.Service
 
             return false;
         }
-        public int Login(string email, string password)
+        public object[] Login(string email, string password)
         {
-
+            
             UserRepository repository = new UserRepository();
 
+            
             var userEmail = repository.GetUserEmail(email);
             object user = null;
-            int nRet;
-
+            string[] nRet = new string[2];
+           
+            
             if (userEmail != null)
             {
                 user = repository.GetUser(email, password);
-                if (user != null)
-                    nRet = 1;
+                if (user != null) {
 
-
-                else { nRet = 2; }
+                    nRet[0] = "1";
+                    nRet[1] = userEmail.Id.ToString() ;
+                }
+                else { nRet[0] = "2"; }
 
             }
-            else { nRet = 3; }
+            else { nRet[0] = "3"; }
             
             return nRet;
         }

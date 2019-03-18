@@ -10,6 +10,8 @@ using Alexandria.Model.DTO;
 using Alexandria.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using Newtonsoft.Json;
 
 namespace Alexandria.API.Controllers
 {
@@ -25,11 +27,13 @@ namespace Alexandria.API.Controllers
             {
                 UserService userservice = new UserService();
 
-                int varCond = userservice.Login(user.Email, user.Password);
+                object[] varCond = userservice.Login(user.Email, user.Password);
 
-                if (varCond == 1)
-                    return StatusCode(200);
-                else if (varCond == 2)
+                if (varCond[0].ToString() == "1")
+                    
+                    return Ok(varCond[1]);
+
+                else if (varCond[0].ToString() == "2")
 
                     return StatusCode(412);
                 else

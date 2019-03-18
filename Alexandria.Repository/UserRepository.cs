@@ -9,7 +9,6 @@ using System.Net.Mime;
 using System.Security.Cryptography;
 using System.Text;
 
-
 /// <summary>
 /// Responsável pelos funções a serem executadas para CRUD do BD
 /// </summary>
@@ -226,6 +225,8 @@ namespace Alexandria.Repository
             return body;
 
         }
+        
+        
     }
 }
 
