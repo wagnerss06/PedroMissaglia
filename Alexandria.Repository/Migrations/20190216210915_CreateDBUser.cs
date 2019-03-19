@@ -18,8 +18,7 @@ namespace Alexandria.Repository.Migrations
                     Email = table.Column<string>(nullable: false),
                     Gender = table.Column<string>(nullable: false),
                     Coin = table.Column<int>(nullable: false),
-                    Password = table.Column<string>(nullable: false),
-                    Id_avatar = table.Column<string>(nullable: false)
+                    Password = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {

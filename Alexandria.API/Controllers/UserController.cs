@@ -10,8 +10,6 @@ using Alexandria.Model.DTO;
 using Alexandria.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using Newtonsoft.Json;
 
 namespace Alexandria.API.Controllers
 {
@@ -22,22 +20,15 @@ namespace Alexandria.API.Controllers
     {
         [HttpPost("login")]
         public IActionResult LoginAsCommonUser([FromBody]UserDTO user)
-        {           
+        {
             try
             {
                 UserService userservice = new UserService();
 
-                object[] varCond = userservice.Login(user.Email, user.Password);
+                if (userservice.Login(user.Email, user.Password))
+                    return Ok();
 
-                if (varCond[0].ToString() == "1")
-                    
-                    return Ok(varCond[1]);
-
-                else if (varCond[0].ToString() == "2")
-
-                    return StatusCode(412);
-                else
-                    return StatusCode(422);
+                return NotFound();
             }
             catch (Exception e)
             {

@@ -9,6 +9,7 @@ using System.Net.Mime;
 using System.Security.Cryptography;
 using System.Text;
 
+
 /// <summary>
 /// Responsável pelos funções a serem executadas para CRUD do BD
 /// </summary>
@@ -179,13 +180,12 @@ namespace Alexandria.Repository
             //var contentID = "Image";
             //var inlineLogo = new Attachment(@"C://Alexandria/Assign.png");
             string nomeUser = GetUserEmail(email).Name;
-            string htmlBody;
-            string url = "https://localhost:3000/?id="+GetUserEmail(email).Id;
+            string htmlBody; 
 
             MailMessage mail = new MailMessage();
 
             mail.IsBodyHtml = true;
-            htmlBody = CreateBody(nomeUser, url);
+            htmlBody = CreateBody(nomeUser);
             
 
             mail.From = new MailAddress(emailAlex);
@@ -209,24 +209,22 @@ namespace Alexandria.Repository
 
             }
         }
-        private string CreateBody(string nameUsuario, string url)
+        private string CreateBody(string nameUsuario)
         {
+            string diretorioHtml = "C:/Alexandria/PedroMissaglia/Alexandria.API/wwwroot/teste.html";
             string body = string.Empty;
-            using (StreamReader reader = new StreamReader("C://Users/pedro.missaglia/source/repos/PedroMissaglia/Alexandria.API/wwwroot/teste.html"))
+            using (StreamReader reader = new StreamReader(diretorioHtml))
             {
 
                 body = reader.ReadToEnd();
 
             }
             body = body.Replace("{fname}", nameUsuario);
-            body = body.Replace("{furl}", url); 
 
 
             return body;
 
         }
-        
-        
     }
 }
 

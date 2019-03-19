@@ -10,6 +10,8 @@ namespace Alexandria.Model
 {
     public class Token
     {
+
+
         //Entidade a ser criada no database
         [JsonProperty("id")]
         public Guid Id { get; set; }

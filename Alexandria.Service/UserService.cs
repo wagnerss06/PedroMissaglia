@@ -1,7 +1,6 @@
 ﻿using Alexandria.Model;
 using Alexandria.Model.DTO;
 using Alexandria.Repository;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -21,6 +20,8 @@ namespace Alexandria.Service
 
             if (repository.GetUserEmail(email) != null) {
 
+
+
                 repository.SendEmail(email);
 
                 return true;
@@ -29,33 +30,19 @@ namespace Alexandria.Service
 
             return false;
         }
-        public object[] Login(string email, string password)
+        public bool Login(string email, string password)
         {
-            
+
             UserRepository repository = new UserRepository();
 
-            
-            var userEmail = repository.GetUserEmail(email);
-            object user = null;
-            string[] nRet = new string[2];
-           
-            
-            if (userEmail != null)
-            {
-                user = repository.GetUser(email, password);
-                if (user != null) {
+            if (repository.GetUser(email, password) != null)
 
-                    nRet[0] = "1";
-                    nRet[1] = userEmail.Id.ToString() ;
-                }
-                else { nRet[0] = "2"; }
 
-            }
-            else { nRet[0] = "3"; }
-            
-            return nRet;
+
+                return true;
+
+            return false;
         }
-
         public void AddUser(User item)
         {
             UserRepository repository = new UserRepository();
@@ -92,12 +79,12 @@ namespace Alexandria.Service
         public void UpdateUser(NewPasswordDTO item)
         {
             UserRepository repository = new UserRepository();
-            var userId = repository.GetItem(item.Id);
+            var userEmail = repository.GetUserEmail(item.Email);
 
-            if (userId != null && item.New_Password.CompareTo(item.Confirm_Password) == 0)
+            if (userEmail != null && item.New_Password.CompareTo(item.Confirm_Password) == 0)
             {
-                userId.Password = item.Confirm_Password;
-                repository.Update(userId.Id, userId);
+                userEmail.Password = item.Confirm_Password;
+                repository.Update(userEmail.Id, userEmail);
             }
             else {
                 throw new Exception("Passwords do not match.");

@@ -30,7 +30,7 @@ namespace Alexandria.API
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            var connection = @"Server=SPON3656;Database=db_alexandria;User Id=sa; Password = Wagner231214!;";
+            var connection = @"Server=SPON5053\SQLEXPRESS;Database=db_alexandria;User Id=sa; Password = totvs@sql@123;";
             services.AddDbContext<Context>(options => options.UseSqlServer(connection));
 
             services.AddCors();

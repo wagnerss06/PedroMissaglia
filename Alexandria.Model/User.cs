@@ -10,11 +10,6 @@ namespace Alexandria.Model
     //Entidade a ser criada no database
     public class User
     {
-        public User()
-        {
-            Bookcase = new HashSet<Bookcase>();
-        }
-
         [JsonProperty("id")]
         public Guid Id { get; set; }
 
@@ -44,12 +39,6 @@ namespace Alexandria.Model
         [Required]
         [JsonProperty("password")]
         public string Password { get; set; }
-
-        [JsonProperty("AvatarId")]
-        public Guid AvatarId { get; set; }
-        public virtual Avatar Avatar { get; set; }
-
-        public virtual ICollection<Bookcase> Bookcase { get; set; }
-
+        
     }
 }
