@@ -2,7 +2,7 @@
 
 namespace Alexandria.Repository.Migrations
 {
-    public partial class TabelUser : Migration
+    public partial class Teste : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

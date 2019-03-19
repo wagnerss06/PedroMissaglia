@@ -1,5 +1,6 @@
 # AlexandriaAPI
 TCC
+
 Passo-a-passo:
 
 Baixar via nuget: Microsoft.AspNet.WebApi.Core
@@ -12,6 +13,7 @@ Baixar via nuget: Microsoft.AspNet.WebApi.Core
 				  Newtonsoft.Json
 
 
+Classes:
 
 	//Onde será implantada as rotas de requests relacionados ao usuário
 	Controller:	
@@ -44,22 +46,6 @@ Baixar via nuget: Microsoft.AspNet.WebApi.Core
 			EmailDTO
 			NewPasswordDTO
 			UserDTO
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	
 

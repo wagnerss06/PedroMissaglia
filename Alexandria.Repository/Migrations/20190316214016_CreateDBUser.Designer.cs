@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Alexandria.Repository.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20190306143014_TabelUser")]
-    partial class TabelUser
+    [Migration("20190316214016_CreateDBUser")]
+    partial class CreateDBUser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -37,6 +37,9 @@ namespace Alexandria.Repository.Migrations
                         .IsRequired();
 
                     b.Property<string>("Gender")
+                        .IsRequired();
+
+                    b.Property<string>("Id_avatar")
                         .IsRequired();
 
                     b.Property<string>("Name")

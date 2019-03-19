@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Alexandria.Repository.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20190216210915_CreateDBUser")]
-    partial class CreateDBUser
+    [Migration("20190317010958_CreateDBAvatar")]
+    partial class CreateDBAvatar
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,10 +21,33 @@ namespace Alexandria.Repository.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Alexandria.Model.Avatar", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Image")
+                        .IsRequired();
+
+                    b.Property<string>("Line");
+
+                    b.Property<string>("Literary_genre")
+                        .IsRequired();
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Avatar");
+                });
+
             modelBuilder.Entity("Alexandria.Model.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("AvatarId");
 
                     b.Property<DateTime>("Birthdate");
 
@@ -39,6 +62,8 @@ namespace Alexandria.Repository.Migrations
                     b.Property<string>("Gender")
                         .IsRequired();
 
+                    b.Property<Guid>("Id_avatar");
+
                     b.Property<string>("Name")
                         .IsRequired();
 
@@ -47,7 +72,16 @@ namespace Alexandria.Repository.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AvatarId");
+
                     b.ToTable("User");
+                });
+
+            modelBuilder.Entity("Alexandria.Model.User", b =>
+                {
+                    b.HasOne("Alexandria.Model.Avatar", "Avatar")
+                        .WithMany("Users")
+                        .HasForeignKey("AvatarId");
                 });
 #pragma warning restore 612, 618
         }
