@@ -30,14 +30,20 @@ namespace Alexandria.Repository
 
         }
 
-        public List<Avatar> GetItens()
-        {
-            throw new NotImplementedException();
-        }
-
+ 
         public void Update(Guid id, Avatar item)
         {
             throw new NotImplementedException();
         }
+
+
+        public List<Avatar> GetItens()
+        {
+            using (Context context = new Context())
+            {
+                return context.Avatar.ToList();
+            }
+        }
+
     }
 }

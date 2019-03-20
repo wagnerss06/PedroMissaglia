@@ -39,6 +39,24 @@ namespace Alexandria.API.Controllers
                 throw e;
             }
         }
+
+        [HttpGet("list")]
+        public IActionResult ListAvatar()
+        {
+           try
+            {
+                AvatarService avatarservice = new AvatarService();
+
+                return Ok(avatarservice.GetListAvatar());
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
+
     }
 }
 

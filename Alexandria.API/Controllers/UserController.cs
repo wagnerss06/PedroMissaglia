@@ -30,9 +30,13 @@ namespace Alexandria.API.Controllers
                 //Busca usuario por email e senha
                 var usu = userservice.Login(user.Email, user.Password);
 
+                IdDTO usuId = new IdDTO(usu.Id);
+
+                
+
                 //Caso achar retorna 200 e o usuario
                 if (usu != null)
-                    return Ok(usu);
+                    return Ok(usuId);
                 else
                 {
                     //caso nao busca somente por email

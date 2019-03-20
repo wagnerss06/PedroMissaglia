@@ -18,6 +18,16 @@ namespace Alexandria.Service
             repository.Add(item);
         }
 
+        public object GetListAvatar()
+        {
+            AvatarRepository repository = new AvatarRepository();
+
+
+           return repository.GetItens();
+        }
+
+
+
 
     }
 }

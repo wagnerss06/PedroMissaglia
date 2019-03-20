@@ -180,7 +180,7 @@ namespace Alexandria.Repository
             //var inlineLogo = new Attachment(@"C://Alexandria/Assign.png");
             string nomeUser = GetUserEmail(email).Name;
             string htmlBody;
-            string url = "https://localhost:3000/?id="+GetUserEmail(email).Id;
+            string url = "http://localhost:4000/?id="+GetUserEmail(email).Id;
 
             MailMessage mail = new MailMessage();
 
