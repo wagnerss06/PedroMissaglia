@@ -26,18 +26,27 @@ namespace Alexandria.API.Controllers
             try
             {
                 UserService userservice = new UserService();
+                
+                //Busca usuario por email e senha
+                var usu = userservice.Login(user.Email, user.Password);
 
-                object[] varCond = userservice.Login(user.Email, user.Password);
-
-                if (varCond[0].ToString() == "1")
-                    
-                    return Ok(JsonConvert.SerializeObject(varCond[1]));
-
-                else if (varCond[0].ToString() == "2")
-
-                    return StatusCode(412);
+                //Caso achar retorna 200 e o usuario
+                if (usu != null)
+                    return Ok(usu);
                 else
-                    return StatusCode(422);
+                {
+                    //caso nao busca somente por email
+                    usu = userservice.Login(user.Email);
+                    if (usu != null)
+                        //se achar retorna 422
+                        return StatusCode(412);
+                    else
+                        //caso contrario retorna 412
+                        return StatusCode(422);
+                }
+                
+                    
+                
             }
             catch (Exception e)
             {

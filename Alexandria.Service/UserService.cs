@@ -29,31 +29,41 @@ namespace Alexandria.Service
 
             return false;
         }
-        public object[] Login(string email, string password)
+        public User Login(string email, string password)
         {
             
             UserRepository repository = new UserRepository();
 
-            
-            var userEmail = repository.GetUserEmail(email);
-            object user = null;
-            string[] nRet = new string[2];
-           
-            
-            if (userEmail != null)
-            {
-                user = repository.GetUser(email, password);
-                if (user != null) {
 
-                    nRet[0] = "1";
-                    nRet[1] = userEmail.Id.ToString() ;
-                }
-                else { nRet[0] = "2"; }
+            User userEmail = repository.GetUser(email, password);
 
-            }
-            else { nRet[0] = "3"; }
-            
-            return nRet;
+            //object user = null;
+            //string[] nRet = new string[2];
+
+
+            //if (userEmail != null)
+            //{
+            //    user = repository.GetUser(email, password);
+            //    if (user != null) {
+
+            //        nRet[0] = "1";
+            //        nRet[1] = userEmail.Id.ToString() ;
+            //    }
+            //    else { nRet[0] = "2"; }
+
+            //}
+            //else { nRet[0] = "3"; }
+
+            //return nRet;
+            return userEmail;
+        }
+
+        public User Login(string email)
+        {
+            UserRepository userRepository = new UserRepository();
+
+            var user = userRepository.GetUserEmail(email);
+            return user;
         }
 
         public void AddUser(User item)
