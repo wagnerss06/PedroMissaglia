@@ -2,66 +2,47 @@
 TCC
 Passo-a-passo:
 
-Baixar via nuget: Microsoft.AspNet.WebApi.Core
-				  Microsoft.AspNetCore.App
-				  Microsoft.AspNetCore.Razor.Design
-				  Microsoft.EntityFrameworkCore.SqlServer (por enquanto)
-				  Microsoft.EntityFrameworkCore.SqlServer.Design
-				  Microsoft.NETCore.App
-				  Microsoft.VisualStudio.Web.CodeGeneration.Design
-				  Newtonsoft.Json
+ Classes:	
+	UserController:			
 
+			//Método para login do usuário, retornará ID
+ 			[HttpPost("login")] - https://localhost:44393/api/User/login
+			
+ 				 json request: "email", "password"
+				 json response: "id"
 
+			//Método para cadastrar usuário, implementado ID do avatar, que pode ou não ser enviado como nulo 
+ 			[HttpPost("signup")] - https://localhost:44393/api/User/signup	
+			
+ 				json request: "name", "email", "password", "birthdate", "gender", "cpf", "avatarid"
 
-	//Onde será implantada as rotas de requests relacionados ao usuário
-	Controller:	
-		
-		UserController:
-		
-			[HttpPost("login")] - https://localhost:44393/api/User/login
+			//Método para excluir usuário da base
+ 			[HttpPost("delete")] - https://localhost:44393/api/User/delete (NÃO IMPLEMENTADO AINDA)			
 
-			[HttpPost("signup")] - https://localhost:44393/api/User/signup
+			//Método para envio de e-mail para o usuário
+ 			[HttpPost("forgotPassword")] - https://localhost:44393/api/User/forgotPassword				
 
-			[HttpGet("delete")] - https://localhost:44393/api/User/delete (NÃO IMPLEMENTADO AINDA)
-        
-			[HttpPost("forgotPassword")] - https://localhost:44393/api/User/forgotPassword
-        
-			[HttpPost("newPassword")]  - https://localhost:44393/api/User/newPassword
-    	
-	Alexandria.Repository:
+ 				json request: "email"
+
+			//Método para atualizar senha do usuário
+ 			[HttpPost("newPassword")]  - https://localhost:44393/api/User/newPassword				
+
+ 				json request: "id", "new_password", "confirm_password"
+				*Lembrete* -> id deve ser passado pelo front no request.
 	
-		UserRepository;
+	AvatarController:
 	
-	Alexandria.Service:
-		
-		UserService;
-		
-	Alexandria.Model:
-		
-		Token;
-		User;
-		DTO:
-			EmailDTO
-			NewPasswordDTO
-			UserDTO
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-	
+			//Método para inserir avatar na base de dados caso haja a necessidade 
+			[HttpPost("insert")] - https://localhost:44393/api/Avatar/insert
+			
+				json request: "name", "literary_genre", "line", "image"
+				
+			//Método para trazer lista de avatares cadastrados	
+			[HttpGet("list")] - https://localhost:44393/api/Avatar/list	
+			
+				json request: vazio
+				json response:  "id", "name", "literary_genre", "line", "image", "users"
+				
+				
+				
+				
