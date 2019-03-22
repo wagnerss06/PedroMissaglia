@@ -149,6 +149,8 @@ namespace Alexandria.Repository
                     user.Email = item.Email;
                     user.Gender = item.Gender;
                     user.Password = MD5Encrypt(item.Password);
+                    user.AvatarId = item.AvatarId;
+
 
                     context.Update(user);
                     context.SaveChanges();

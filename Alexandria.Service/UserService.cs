@@ -83,23 +83,21 @@ namespace Alexandria.Service
             item.Password = repository.MD5Encrypt(item.Password);
             repository.Add(item);     
         }
-        public void RemoveUser(User user)
+        public void RemoveUser(IdDTO user)
         {
             UserRepository repository = new UserRepository();
 
-            var userEmail = repository.GetUserEmail(user.Email);
+            var usu = repository.GetItem(user.Id);
 
-            if (userEmail == null)
+            if (usu == null)
             {
                 throw new Exception("User does not exists");
 
             }
 
-            repository.GetUser(user.Email, user.Password);
-
             repository.Delete(user.Id);
         }
-        public void UpdateUser(NewPasswordDTO item)
+        public void UpdatePasswordUser(NewPasswordDTO item)
         {
             UserRepository repository = new UserRepository();
             var userId = repository.GetItem(item.Id);
@@ -111,6 +109,21 @@ namespace Alexandria.Service
             }
             else {
                 throw new Exception("Passwords do not match.");
+            }
+
+        }
+        public void UpdateAvatarUser(UserAvatarDTO item)
+        {
+            UserRepository repository = new UserRepository();
+            var userId = repository.GetItem(item.Id);
+
+            if (userId != null )
+            {              
+                repository.Update(userId.Id, userId);
+            }
+            else
+            {
+                throw new Exception();
             }
 
         }

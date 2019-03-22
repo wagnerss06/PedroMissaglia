@@ -80,8 +80,8 @@ namespace Alexandria.API.Controllers
             }
         }
         //Em andamento
-        [HttpGet("delete")]
-        public IActionResult DeleteUser([FromBody]User user)
+        [HttpDelete("delete")]
+        public IActionResult DeleteUser([FromBody]IdDTO user)
         {
             try
             {
@@ -120,8 +120,24 @@ namespace Alexandria.API.Controllers
             {
                 UserService userservice = new UserService();
 
-                userservice.UpdateUser(item);
+                userservice.UpdatePasswordUser(item);
           
+
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        [HttpPost("newuseravatar")]
+        public IActionResult UpdateUserAvatar([FromBody]UserAvatarDTO item)
+        {
+            try
+            {
+                UserService userservice = new UserService();
+
+                userservice.UpdateAvatarUser(item);
 
                 return Ok();
             }
