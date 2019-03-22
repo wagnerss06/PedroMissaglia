@@ -1,0 +1,21 @@
+User -> 
+
+	Login ->	 		Login_CT01 - login sem e-mail cadastrado
+						Login_CT02 - login com senha errada
+						Login_CT03 - login happy path
+				 
+	Signup ->    		Signup_CT01 - signup com e-mail já cadastrado
+						Signup_CT02 - signup happy path
+				 
+				 
+	forgotPassword -> 	FP_CT01 - Envio de e-mail não cadastrado 
+						FP_CT02 - Envio de e-mail happy path
+						
+	
+	newPassword 	->  NP_CT01 - Troca de password happy path
+						NP_CT02 - Senhas incompatíveis
+	
+	
+    newUserAvatar 	->  NUA_CT01 - Update de User com um Avatar Id inválido
+						NUA_CT02 - Update de User com um Id inválido
+						NUA_CT03 - Happy Path
