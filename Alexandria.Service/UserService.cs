@@ -127,6 +127,21 @@ namespace Alexandria.Service
             }
 
         }
+        // função para retornar usuário completo
+        public User GetUser(Guid id)
+        {
+            UserRepository repository = new UserRepository();
+
+            var usu = repository.GetItem(id);
+
+            if (usu == null)
+            {
+                throw new Exception("User does not exists");
+            }
+            return usu;
+        }
 
     }
+
+    
 }

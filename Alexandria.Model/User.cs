@@ -45,7 +45,7 @@ namespace Alexandria.Model
         [JsonProperty("password")]
         public string Password { get; set; }
 
-        [JsonProperty("avatarid")]
+        [JsonProperty("AvatarId")]
         public Guid? AvatarId { get; set; }
         public virtual Avatar Avatar { get; set; }
 

@@ -28,25 +28,29 @@ namespace Alexandria.API.Controllers
                 UserService userservice = new UserService();
                 
                 //Busca usuario por email e senha
-                var usu = userservice.Login(user.Email, user.Password);
+                var usu = userservice.Login(user.Email);
+                object use = null;
+                
 
                 IdDTO usuId = new IdDTO(usu.Id);
 
-                
-
                 //Caso achar retorna 200 e o usuario
                 if (usu != null)
-                    return Ok(usuId);
+                {
+
+                    use = userservice.Login(user.Email, user.Password);
+                    if (use != null)
+                        return Ok(usuId);
+
+                    else { return StatusCode(412); }
+                }
                 else
                 {
-                    //caso nao busca somente por email
-                    usu = userservice.Login(user.Email);
-                    if (usu != null)
-                        //se achar retorna 422
-                        return StatusCode(412);
-                    else
-                        //caso contrario retorna 412
-                        return StatusCode(422);
+
+
+                    return StatusCode(422);
+                    //caso contrario retorna 412
+
                 }
                 
                     
@@ -146,6 +150,33 @@ namespace Alexandria.API.Controllers
                 throw e;
             }
         }
+
+        [HttpGet("getuser/{userid}")]
+        public IActionResult GetUser([FromRoute]Guid userid)
+        {
+            try
+            {
+                UserService userservice = new UserService();
+
+                //Busca usuario por id
+                var usu = userservice.GetUser(userid);
+
+                //Caso achar retorna 200 e o usuario
+                if (usu != null)
+                    return Ok(usu);
+                else
+                {
+                   return StatusCode(412);
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+
+        }
+
 
 
     }
