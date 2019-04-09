@@ -29,6 +29,14 @@ Passo-a-passo:
 
  				json request: "id", "new_password", "confirm_password"
 				*Lembrete* -> id deve ser passado pelo front no request.
+				
+			//Método para o usuario cadastrar o avatar
+			[HttpPost("newuseravatar")] - https://localhost:44393/api/User/newuseravatar
+			
+			json request: "id", "avatarid"
+ 
+			//método paa busca de tdas as informações do usuário
+			[HttpGet("getuser/{userid}")] - https://localhost:44394/api/User/getuser/*colocar aqui o id do usuário*
 	
 	AvatarController:
 	
