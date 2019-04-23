@@ -171,7 +171,7 @@ namespace Alexandria.Repository
            
             return builder.ToString();
         }
-        //Função para envio de e-mail
+        //Função para envio de e-maile
         public void SendEmail(string email)
         {
 
@@ -214,7 +214,7 @@ namespace Alexandria.Repository
         private string CreateBody(string nameUsuario, string url)
         {
             string body = string.Empty;
-            using (StreamReader reader = new StreamReader("C://Users/pedro.missaglia/source/repos/PedroMissaglia/Alexandria.API/wwwroot/teste.html"))
+            using (StreamReader reader = new StreamReader("C://Users/silva.wagner/Documents/GitHub/PedroMissaglia/Alexandria.API/wwwroot/teste.html"))
             {
 
                 body = reader.ReadToEnd();

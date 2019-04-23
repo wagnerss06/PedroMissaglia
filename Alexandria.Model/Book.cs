@@ -30,8 +30,13 @@ namespace Alexandria.Model
         public string ISBN { get; set; }
 
         [Required]
-        [JsonProperty("authors")] //Array de String. verificar implementação
-        public string Authors { get; set; }
+        [JsonProperty("isbn13")]
+        public string ISBN13 { get; set; }
+
+        [Required]
+        [JsonProperty("AuthorId")] //Array de String. verificar implementação
+        public string AuthorId { get; set; }
+        public virtual Authors Authors { get; set; }
 
         [Required]
         [JsonProperty("editora")]
@@ -56,14 +61,28 @@ namespace Alexandria.Model
         [JsonProperty("gender")]
         public string Literary_genre { get; set; }
 
+        [JsonProperty("status")]
+        public string Status { get; set; }
+
+        [JsonProperty("pageCount")]
+        public string PageCount { get; set; }
+
+        [JsonProperty("image")]
+        public string Image { get; set; }
+
+        [Required]
+        [JsonProperty("subject")] //Array de String. verificar implementação
+        public string Subject { get; set; }
+        [Required]
+        [JsonProperty("SubjectsId")] //Array de String. verificar implementação
+        public string SubjectsId { get; set; }
+        public virtual Subjects Subjects { get; set; }
+
         public virtual ICollection<Bookcase> Bookcase { get; set; }
-        
+
         /*
         //Campos a serem criados após a implementacao da API
-        [Required]
-        [JsonProperty("isbn13")]
-        public string ISBN13 { get; set; }
-
+        
         [Required]
         [JsonProperty("dewey_decimal")]// Codigo bibliotecario
         public string dewey_decimal { get; set; }
@@ -80,11 +99,11 @@ namespace Alexandria.Model
         public string Binding { get; set; }
 
         [Required]
-        [JsonProperty("dimensões")]
+        [JsonProperty("dimensions")]
         public string Dimensions { get; set; }
 
         [Required]
-        [JsonProperty("visão geral")]
+        [JsonProperty("overview")]
         public string Overview { get; set; }
 
         [Required]
@@ -94,10 +113,6 @@ namespace Alexandria.Model
         [Required]
         [JsonProperty("synopsys")]
         public string Synopsys { get; set; }
-
-        [Required]
-        [JsonProperty("subject")] //Array de String. verificar implementação
-        public string Subject { get; set; }
 
         [JsonProperty("reviews")] //Array de String. verificar implementação. Verifica a lingua dos reviews.
         public string Reviews { get; set; }

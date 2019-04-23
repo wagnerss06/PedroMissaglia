@@ -22,7 +22,7 @@ namespace Alexandria.API.Controllers
     public class AvatarController : ControllerBase
     {
         [HttpPost("insert")]
-        public IActionResult SignUpUser([FromBody]Avatar avatar)
+        public IActionResult InsertAvatar([FromBody]Avatar avatar)
         {
 
             try

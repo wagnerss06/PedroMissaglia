@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Google.Apis.Books.v1" Version="1.38.2.1441" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.4" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.0" PrivateAssets="All" />
