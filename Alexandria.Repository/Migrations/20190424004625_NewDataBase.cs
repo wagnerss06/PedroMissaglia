@@ -55,7 +55,7 @@ namespace Alexandria.Repository.Migrations
                     Title_long = table.Column<string>(nullable: true),
                     ISBN = table.Column<string>(nullable: false),
                     ISBN13 = table.Column<string>(nullable: false),
-                    AuthorsId = table.Column<Guid>(nullable: false),
+                    AuthorsId = table.Column<Guid>(nullable: true),
                     Editora = table.Column<string>(nullable: false),
                     Edition = table.Column<string>(nullable: false),
                     Date_published = table.Column<DateTime>(nullable: false),
@@ -63,7 +63,7 @@ namespace Alexandria.Repository.Migrations
                     Pages = table.Column<int>(nullable: false),
                     Literary_genre = table.Column<string>(nullable: false),
                     Status = table.Column<string>(nullable: true),
-                    PageCount = table.Column<string>(nullable: true),
+                    PageCount = table.Column<int>(nullable: false),
                     Image = table.Column<string>(nullable: true),
                     SubjectsId = table.Column<Guid>(nullable: true)
                 },
@@ -75,7 +75,7 @@ namespace Alexandria.Repository.Migrations
                         column: x => x.AuthorsId,
                         principalTable: "Authors",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Book_Subjects_SubjectsId",
                         column: x => x.SubjectsId,

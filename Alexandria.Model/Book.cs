@@ -33,13 +33,13 @@ namespace Alexandria.Model
         [JsonProperty("isbn13")]
         public string ISBN13 { get; set; }
 
-        [Required]
+        //[Required]
         [JsonProperty("AuthorsId")] //Array de String. verificar implementação
         public Guid? AuthorsId { get; set; }
         //public virtual Authors Authors { get; set; }
 
         [Required]
-        [JsonProperty("editora")]
+        [JsonProperty("publisher")]
         public string Editora { get; set; }
 
         [Required]
@@ -54,7 +54,7 @@ namespace Alexandria.Model
         public string Language { get; set; }
 
         [Required]
-        [JsonProperty("páginas")]
+        [JsonProperty("pages")]
         public int Pages { get; set; }
 
         [Required]
@@ -65,7 +65,7 @@ namespace Alexandria.Model
         public string Status { get; set; }
 
         [JsonProperty("pageCount")]
-        public string PageCount { get; set; }
+        public int PageCount { get; set; }
 
         [JsonProperty("image")]
         public string Image { get; set; }

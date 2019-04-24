@@ -1,28 +1,17 @@
 ﻿using Alexandria.Model;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text;
 
 namespace Alexandria.Repository
 {
-    public class BookcaseRepository : ICRUD<Bookcase>
+    public class AuthorRepository : ICRUD<Authors>
     {
-
-        public void Add(Bookcase item)
+        public void Add(Authors item)
         {
             using (Context context = new Context())
             {
-                context.Bookcase.Add(item);
-                context.SaveChanges();
-            }
-        }
-
-        public void Delete(Bookcase bookId)
-        {
-            using (Context context = new Context())
-            {
-                context.Bookcase.Remove(bookId);
+                context.Authors.Add(item);
                 context.SaveChanges();
             }
         }
@@ -32,22 +21,19 @@ namespace Alexandria.Repository
             throw new NotImplementedException();
         }
 
-        public Bookcase GetItem(Guid id)
+        public Authors GetItem(Guid id)
         {
             throw new NotImplementedException();
         }
 
-
-        public List<Bookcase> GetItens()
+        public List<Authors> GetItens()
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Guid id, Bookcase item)
+        public void Update(Guid id, Authors item)
         {
             throw new NotImplementedException();
         }
     }
 }
-
-
