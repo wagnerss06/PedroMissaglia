@@ -53,7 +53,6 @@ namespace Alexandria.Repository
                     book.Title          = item.Title;
                     book.Title_long     = item.Title_long;
                     book.ISBN           = item.ISBN;
-                    book.Authors        = item.Authors;
                     book.Editora        = item.Editora;
                     book.Edition        = item.Edition;
                     book.Date_published = item.Date_published;

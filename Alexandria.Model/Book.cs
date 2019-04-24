@@ -34,9 +34,9 @@ namespace Alexandria.Model
         public string ISBN13 { get; set; }
 
         [Required]
-        [JsonProperty("AuthorId")] //Array de String. verificar implementação
-        public string AuthorId { get; set; }
-        public virtual Authors Authors { get; set; }
+        [JsonProperty("AuthorsId")] //Array de String. verificar implementação
+        public Guid? AuthorsId { get; set; }
+        //public virtual Authors Authors { get; set; }
 
         [Required]
         [JsonProperty("editora")]
@@ -70,13 +70,9 @@ namespace Alexandria.Model
         [JsonProperty("image")]
         public string Image { get; set; }
 
-        [Required]
-        [JsonProperty("subject")] //Array de String. verificar implementação
-        public string Subject { get; set; }
-        [Required]
         [JsonProperty("SubjectsId")] //Array de String. verificar implementação
-        public string SubjectsId { get; set; }
-        public virtual Subjects Subjects { get; set; }
+        public Guid? SubjectsId { get; set; }
+        //public virtual Subjects Subjects { get; set; }
 
         public virtual ICollection<Bookcase> Bookcase { get; set; }
 
