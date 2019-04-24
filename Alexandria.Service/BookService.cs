@@ -42,6 +42,17 @@ namespace Alexandria.Service
             return repository.GetBookIsbn13(isbn13);
         }
 
+        public object GetBookAuthor(string author)
+        {
+            AuthorRepository authrepository = new AuthorRepository();
+
+            Authors item =  authrepository.GetItembyName(author);
+
+            BookRepository repository = new BookRepository();
+
+
+            return repository.GetBookByAuthor(item.Id);
+        }
 
     }
 }

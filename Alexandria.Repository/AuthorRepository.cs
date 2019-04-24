@@ -1,6 +1,7 @@
 ﻿using Alexandria.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Alexandria.Repository
@@ -23,7 +24,18 @@ namespace Alexandria.Repository
 
         public Authors GetItem(Guid id)
         {
-            throw new NotImplementedException();
+            using (Context context = new Context())
+            {
+                return context.Authors.Where(x => x.Id == id).FirstOrDefault();
+            }
+        }
+
+        public Authors GetItembyName(string authorName)
+        {
+            using (Context context = new Context())
+            {
+                return context.Authors.Where(x => x.Author == authorName).FirstOrDefault();
+            }
         }
 
         public List<Authors> GetItens()

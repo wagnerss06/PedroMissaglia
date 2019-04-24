@@ -76,6 +76,12 @@ Passo-a-passo:
 					
 				json request: "isbn13"
 
+			//Método para busca de livro por autor
+			[HttpGet("getbookauthor")] - https://localhost:44393/api/Book/getbookauthor
+			
+				json request: "author"
+			
+			
 				
 			
 			
