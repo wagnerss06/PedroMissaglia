@@ -82,7 +82,20 @@ namespace Alexandria.API.Controllers
                 throw e;
             }
         }
+        [HttpGet("getbookauthor")]
+        public IActionResult GetBookFromAuthor([FromBody]AuthorNameDTO item)
+        {
+            try
+            {
+                BookService bookservice = new BookService();
 
+                return Ok(bookservice.GetBookAuthor(item.Author));
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
 
 
 
