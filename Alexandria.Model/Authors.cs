@@ -10,7 +10,7 @@ namespace Alexandria.Model
     {
         public Authors()
         {
-            Book = new HashSet<Book>();
+            this.Book = new HashSet<Book>();
         }
 
         [JsonProperty("id")]// Número gerado automaticamente.

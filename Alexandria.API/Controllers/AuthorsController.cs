@@ -40,7 +40,21 @@ namespace Alexandria.API.Controllers
             }
         }
 
- 
+        [HttpGet("listauth")]
+        public IActionResult ListAuthors()
+        {
+            try
+            {
+                AuthorsService authorsservice = new AuthorsService();
+
+                return Ok(authorsservice.GetListAut());
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
 
     }
 }

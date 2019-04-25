@@ -26,6 +26,18 @@ namespace Alexandria.Service
            return repository.GetItens();
         }
 
+        public Avatar GetAvatar(Guid id)
+        {
+            AvatarRepository repository = new AvatarRepository();
+
+            var usu = repository.GetItem(id);
+
+            if (usu == null)
+            {
+                throw new Exception("User does not exists");
+            }
+            return usu;
+        }
 
 
 

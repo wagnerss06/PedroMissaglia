@@ -16,7 +16,17 @@ namespace Alexandria.Service
             item.Id = Guid.NewGuid();
             repository.Add(item);
         }
+
+        public object GetListAut()
+        {
+            AuthorRepository repository = new AuthorRepository();
+
+
+            return repository.GetItens();
+        }
     }
-   
+    
+
+
 
 }

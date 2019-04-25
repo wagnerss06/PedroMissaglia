@@ -40,7 +40,10 @@ namespace Alexandria.Repository
 
         public List<Authors> GetItens()
         {
-            throw new NotImplementedException();
+            using (Context context = new Context())
+            {
+                return context.Authors.ToList();
+            }
         }
 
         public void Update(Guid id, Authors item)

@@ -26,11 +26,12 @@ namespace Alexandria.Repository
 
         public Avatar GetItem(Guid id)
         {
-            throw new NotImplementedException();
-
+            using (Context context = new Context())
+            {
+                return context.Avatar.Where(x => x.Id == id).FirstOrDefault();
+            }
         }
 
- 
         public void Update(Guid id, Avatar item)
         {
             throw new NotImplementedException();
@@ -45,5 +46,9 @@ namespace Alexandria.Repository
             }
         }
 
+        Avatar ICRUD<Avatar>.GetItem(Guid id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

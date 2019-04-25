@@ -55,6 +55,32 @@ namespace Alexandria.API.Controllers
             }
         }
 
+        [HttpGet("getavatar/{avatarid}")]
+        public IActionResult GetAvatar([FromRoute]Guid avatarid)
+        {
+            try
+            {
+                AvatarService avatarservice = new AvatarService();
+
+                //Busca usuario por id
+                var usu = avatarservice.GetAvatar(avatarid);
+
+                //Caso achar retorna 200 e o usuario
+                if (usu != null)
+                    return Ok(usu);
+                else
+                {
+                    return StatusCode(412);
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+
+        }
+
 
 
     }
