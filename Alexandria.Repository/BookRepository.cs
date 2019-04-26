@@ -95,15 +95,15 @@ namespace Alexandria.Repository
         }
 
 
-        public List<Book> GetBookByAuthor(Guid authorId) // method por ISBN13
+
+        
+        public Book GetBookByAuthor(Guid id)
         {
             using (Context context = new Context())
             {
-                return context.Book.Where(x => x.AuthorsId == authorId).ToList();
-
+                return context.Book.Where(x => x.AuthorsId == id).FirstOrDefault();
             }
         }
-
         
         public List<Book> GetItens()
         {

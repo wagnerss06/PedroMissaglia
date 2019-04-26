@@ -36,7 +36,7 @@ namespace Alexandria.Model
         //[Required]
         [JsonProperty("AuthorsId")] //Array de String. verificar implementação
         public Guid? AuthorsId { get; set; }
-        //public virtual Authors Authors { get; set; }
+        public virtual Authors Authors { get; set; }
 
         [Required]
         [JsonProperty("publisher")]
