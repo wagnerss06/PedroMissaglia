@@ -82,11 +82,7 @@ namespace Alexandria.Repository.Migrations
                     b.Property<string>("Literary_genre")
                         .IsRequired();
 
-                    b.Property<int>("PageCount");
-
                     b.Property<int>("Pages");
-
-                    b.Property<string>("Status");
 
                     b.Property<Guid?>("SubjectsId");
 
@@ -110,6 +106,10 @@ namespace Alexandria.Repository.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<Guid?>("BookId");
+
+                    b.Property<int>("PageCount");
+
+                    b.Property<string>("Status");
 
                     b.HasKey("Id");
 
@@ -170,7 +170,7 @@ namespace Alexandria.Repository.Migrations
 
             modelBuilder.Entity("Alexandria.Model.Book", b =>
                 {
-                    b.HasOne("Alexandria.Model.Authors")
+                    b.HasOne("Alexandria.Model.Authors", "Authors")
                         .WithMany("Book")
                         .HasForeignKey("AuthorsId");
 

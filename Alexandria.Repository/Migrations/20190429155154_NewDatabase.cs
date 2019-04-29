@@ -62,8 +62,6 @@ namespace Alexandria.Repository.Migrations
                     Language = table.Column<string>(nullable: false),
                     Pages = table.Column<int>(nullable: false),
                     Literary_genre = table.Column<string>(nullable: false),
-                    Status = table.Column<string>(nullable: true),
-                    PageCount = table.Column<int>(nullable: false),
                     Image = table.Column<string>(nullable: true),
                     SubjectsId = table.Column<Guid>(nullable: true)
                 },
@@ -89,6 +87,8 @@ namespace Alexandria.Repository.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
+                    Status = table.Column<string>(nullable: true),
+                    PageCount = table.Column<int>(nullable: false),
                     BookId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>

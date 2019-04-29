@@ -61,8 +61,6 @@ namespace Alexandria.Repository
                     book.Language       = item.Language;
                     book.Pages          = item.Pages;
                     book.Literary_genre = item.Literary_genre;
-                    book.PageCount      = item.PageCount;
-                    book.Status         = book.Status;
                        
                     context.Update(book);
                     context.SaveChanges();

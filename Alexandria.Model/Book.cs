@@ -58,14 +58,8 @@ namespace Alexandria.Model
         public int Pages { get; set; }
 
         [Required]
-        [JsonProperty("gender")]
+        [JsonProperty("literary_genre")]
         public string Literary_genre { get; set; }
-
-        [JsonProperty("status")]
-        public string Status { get; set; }
-
-        [JsonProperty("pageCount")]
-        public int PageCount { get; set; }
 
         [JsonProperty("image")]
         public string Image { get; set; }

@@ -157,6 +157,23 @@ namespace Alexandria.Repository
                 }
             }
         }
+
+        public void UpdateAvatar(Guid id, Guid AvatarId)
+        {
+            var user = GetItem(id);
+
+            using (Context context = new Context())
+            {
+                if (user != null)
+                {
+                    user.AvatarId = AvatarId;
+                    
+                    context.Update(user);
+                    context.SaveChanges();
+                }
+            }
+        }
+
         //Função auxiliar para gerar string aleatório (útil)
         public string RandomString()
         {

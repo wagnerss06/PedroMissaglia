@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Alexandria.Repository.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20190424040504_NewDatabase")]
+    [Migration("20190429155154_NewDatabase")]
     partial class NewDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -84,11 +84,7 @@ namespace Alexandria.Repository.Migrations
                     b.Property<string>("Literary_genre")
                         .IsRequired();
 
-                    b.Property<int>("PageCount");
-
                     b.Property<int>("Pages");
-
-                    b.Property<string>("Status");
 
                     b.Property<Guid?>("SubjectsId");
 
@@ -112,6 +108,10 @@ namespace Alexandria.Repository.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<Guid?>("BookId");
+
+                    b.Property<int>("PageCount");
+
+                    b.Property<string>("Status");
 
                     b.HasKey("Id");
 
@@ -172,7 +172,7 @@ namespace Alexandria.Repository.Migrations
 
             modelBuilder.Entity("Alexandria.Model.Book", b =>
                 {
-                    b.HasOne("Alexandria.Model.Authors")
+                    b.HasOne("Alexandria.Model.Authors", "Authors")
                         .WithMany("Book")
                         .HasForeignKey("AuthorsId");
 
