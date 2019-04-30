@@ -68,14 +68,26 @@ namespace Alexandria.API.Controllers
         [HttpPost("signup")]
         public IActionResult SignUpUser([FromBody]User user)
         {
-
             try
             {
                 UserService userservice = new UserService();
 
                 userservice.AddUser(user);
 
-                return Ok();
+                var usu = userservice.GetUserEmail(user.Email);
+
+
+                //Caso achar retorna 200 e o usuario
+                if (usu != null)
+                {
+                    IdDTO usuId = new IdDTO(usu.Id);
+                    return Ok(usuId);
+                }
+                else
+                {
+                    return StatusCode(422);
+                    //caso contrario retorna 412
+                }
             }
             catch (Exception e)
             {

@@ -141,6 +141,19 @@ namespace Alexandria.Service
             return usu;
         }
 
+        // função para retornar usuário completo
+        public User GetUserEmail(string email)
+        {
+            UserRepository repository = new UserRepository();
+
+            var usu = repository.GetUserEmail(email);
+
+            if (usu == null)
+            {
+                throw new Exception("User does not exists");
+            }
+            return usu;
+        }
     }
 
     
