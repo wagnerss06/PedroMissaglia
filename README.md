@@ -51,7 +51,7 @@ Passo-a-passo:
 				json request: vazio
 				json response:  "id", "name", "literary_genre", "line", "image", "users"
 				
-			//método paa busca de tdas as informações do usuário
+			//método paa busca de tdas as informações do Avatar
 			[HttpGet("getavatar/{avatarid}")] - https://localhost:44393/api/Avatar/getavatar/*colocar aqui o id do avatar*
 				
 	BookController:
