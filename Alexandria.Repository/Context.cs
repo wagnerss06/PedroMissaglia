@@ -22,6 +22,12 @@ namespace Alexandria.Repository
         //Criando tabela Bookcase no DB 
         public DbSet<Bookcase> Bookcase { get; set; }
 
+        //Criando tabela Authors no DB 
+        public DbSet<Authors> Authors { get; set; }
+
+        //Criando tabela Subjects no DB 
+        public DbSet<Subjects> Subjects { get; set; }
+
         //Construtores
         public Context(DbContextOptions<Context> options) : base(options)
         {

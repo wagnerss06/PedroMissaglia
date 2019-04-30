@@ -26,6 +26,7 @@ namespace Alexandria.Repository
             throw new NotImplementedException();
         }
 
+        //Auxiliar
         public Book GetItem(Guid id)
         {
             using (Context context = new Context())
@@ -34,11 +35,11 @@ namespace Alexandria.Repository
             }
         }
 
-        public List<Book> GetItens()
+        public List<Book> GetItens(int n)
         {
             using (Context context = new Context())
             {
-                return context.Book.ToList();
+                return context.Book.ToList().GetRange(0, n);
             }
         }
 
@@ -53,15 +54,14 @@ namespace Alexandria.Repository
                     book.Title          = item.Title;
                     book.Title_long     = item.Title_long;
                     book.ISBN           = item.ISBN;
-                    book.Authors        = item.Authors;
+                    book.ISBN13         = item.ISBN13;
                     book.Editora        = item.Editora;
                     book.Edition        = item.Edition;
                     book.Date_published = item.Date_published;
                     book.Language       = item.Language;
                     book.Pages          = item.Pages;
                     book.Literary_genre = item.Literary_genre;
-
-
+                       
                     context.Update(book);
                     context.SaveChanges();
                 }
@@ -84,5 +84,28 @@ namespace Alexandria.Repository
             }
         }
 
+        public Book GetBookIsbn13(string isbn13) // method por ISBN13
+        {
+            using (Context context = new Context())
+            {
+                return context.Book.Where(x => x.ISBN13 == isbn13).FirstOrDefault();
+            }
+        }
+
+
+
+        
+        public Book GetBookByAuthor(Guid id)
+        {
+            using (Context context = new Context())
+            {
+                return context.Book.Where(x => x.AuthorsId == id).FirstOrDefault();
+            }
+        }
+        
+        public List<Book> GetItens()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

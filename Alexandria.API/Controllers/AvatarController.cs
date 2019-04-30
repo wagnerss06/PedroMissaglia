@@ -22,7 +22,7 @@ namespace Alexandria.API.Controllers
     public class AvatarController : ControllerBase
     {
         [HttpPost("insert")]
-        public IActionResult SignUpUser([FromBody]Avatar avatar)
+        public IActionResult InsertAvatar([FromBody]Avatar avatar)
         {
 
             try
@@ -53,6 +53,32 @@ namespace Alexandria.API.Controllers
             {
                 throw e;
             }
+        }
+
+        [HttpGet("getavatar/{avatarid}")]
+        public IActionResult GetAvatar([FromRoute]Guid avatarid)
+        {
+            try
+            {
+                AvatarService avatarservice = new AvatarService();
+
+                //Busca usuario por id
+                var usu = avatarservice.GetAvatar(avatarid);
+
+                //Caso achar retorna 200 e o usuario
+                if (usu != null)
+                    return Ok(usu);
+                else
+                {
+                    return StatusCode(412);
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+
         }
 
 

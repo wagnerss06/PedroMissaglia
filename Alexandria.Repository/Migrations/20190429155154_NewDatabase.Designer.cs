@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Alexandria.Repository.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20190317205218_CreateDBBook")]
-    partial class CreateDBBook
+    [Migration("20190429155154_NewDatabase")]
+    partial class NewDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,19 @@ namespace Alexandria.Repository.Migrations
                 .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Alexandria.Model.Authors", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Author")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Authors");
+                });
 
             modelBuilder.Entity("Alexandria.Model.Avatar", b =>
                 {
@@ -47,8 +60,7 @@ namespace Alexandria.Repository.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Authors")
-                        .IsRequired();
+                    b.Property<Guid?>("AuthorsId");
 
                     b.Property<DateTime>("Date_published");
 
@@ -61,6 +73,11 @@ namespace Alexandria.Repository.Migrations
                     b.Property<string>("ISBN")
                         .IsRequired();
 
+                    b.Property<string>("ISBN13")
+                        .IsRequired();
+
+                    b.Property<string>("Image");
+
                     b.Property<string>("Language")
                         .IsRequired();
 
@@ -69,12 +86,18 @@ namespace Alexandria.Repository.Migrations
 
                     b.Property<int>("Pages");
 
+                    b.Property<Guid?>("SubjectsId");
+
                     b.Property<string>("Title")
                         .IsRequired();
 
                     b.Property<string>("Title_long");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthorsId");
+
+                    b.HasIndex("SubjectsId");
 
                     b.ToTable("Book");
                 });
@@ -84,17 +107,30 @@ namespace Alexandria.Repository.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("BookId");
+                    b.Property<Guid?>("BookId");
 
-                    b.Property<Guid>("UserId");
+                    b.Property<int>("PageCount");
+
+                    b.Property<string>("Status");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BookId");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Bookcase");
+                });
+
+            modelBuilder.Entity("Alexandria.Model.Subjects", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Subject")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Subjects");
                 });
 
             modelBuilder.Entity("Alexandria.Model.User", b =>
@@ -102,9 +138,11 @@ namespace Alexandria.Repository.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("AvatarId");
+                    b.Property<Guid?>("AvatarId");
 
                     b.Property<DateTime>("Birthdate");
+
+                    b.Property<Guid?>("BookcaseId");
 
                     b.Property<string>("CPF")
                         .IsRequired();
@@ -127,28 +165,38 @@ namespace Alexandria.Repository.Migrations
 
                     b.HasIndex("AvatarId");
 
+                    b.HasIndex("BookcaseId");
+
                     b.ToTable("User");
+                });
+
+            modelBuilder.Entity("Alexandria.Model.Book", b =>
+                {
+                    b.HasOne("Alexandria.Model.Authors", "Authors")
+                        .WithMany("Book")
+                        .HasForeignKey("AuthorsId");
+
+                    b.HasOne("Alexandria.Model.Subjects")
+                        .WithMany("Book")
+                        .HasForeignKey("SubjectsId");
                 });
 
             modelBuilder.Entity("Alexandria.Model.Bookcase", b =>
                 {
-                    b.HasOne("Alexandria.Model.Book", "Book")
+                    b.HasOne("Alexandria.Model.Book")
                         .WithMany("Bookcase")
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Alexandria.Model.User", "User")
-                        .WithMany("Bookcase")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("BookId");
                 });
 
             modelBuilder.Entity("Alexandria.Model.User", b =>
                 {
-                    b.HasOne("Alexandria.Model.Avatar", "Avatar")
+                    b.HasOne("Alexandria.Model.Avatar")
                         .WithMany("Users")
-                        .HasForeignKey("AvatarId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("AvatarId");
+
+                    b.HasOne("Alexandria.Model.Bookcase", "Bookcase")
+                        .WithMany()
+                        .HasForeignKey("BookcaseId");
                 });
 #pragma warning restore 612, 618
         }

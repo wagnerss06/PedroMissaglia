@@ -157,6 +157,23 @@ namespace Alexandria.Repository
                 }
             }
         }
+
+        public void UpdateAvatar(Guid id, Guid AvatarId)
+        {
+            var user = GetItem(id);
+
+            using (Context context = new Context())
+            {
+                if (user != null)
+                {
+                    user.AvatarId = AvatarId;
+                    
+                    context.Update(user);
+                    context.SaveChanges();
+                }
+            }
+        }
+
         //Função auxiliar para gerar string aleatório (útil)
         public string RandomString()
         {
@@ -171,7 +188,7 @@ namespace Alexandria.Repository
            
             return builder.ToString();
         }
-        //Função para envio de e-mail
+        //Função para envio de e-maile
         public void SendEmail(string email)
         {
 
@@ -214,7 +231,7 @@ namespace Alexandria.Repository
         private string CreateBody(string nameUsuario, string url)
         {
             string body = string.Empty;
-            using (StreamReader reader = new StreamReader("C://Users/pedro.missaglia/source/repos/PedroMissaglia/Alexandria.API/wwwroot/teste.html"))
+            using (StreamReader reader = new StreamReader("C://Users/silva.wagner/Documents/GitHub/PedroMissaglia/Alexandria.API/wwwroot/teste.html"))
             {
 
                 body = reader.ReadToEnd();

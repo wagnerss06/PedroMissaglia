@@ -119,7 +119,7 @@ namespace Alexandria.Service
 
             if (userId != null )
             {              
-                repository.Update(userId.Id, userId);
+                repository.UpdateAvatar(userId.Id, item.AvatarId);
             }
             else
             {
