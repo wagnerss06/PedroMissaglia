@@ -48,38 +48,40 @@ Passo-a-passo:
 		
 				json request: "id", "avatarid"
 
-			//método paa busca de tdas as informações do usuário
-			[HttpGet("getuser/{userid}")] - https://localhost:44394/api/User/getuser/*colocar aqui o id do usuário*
-	
+				
+			//método paa busca de tdas as informações do Avatar
+			[HttpGet("getavatar/{avatarid}")] - https://localhost:44393/api/Avatar/getavatar/*colocar aqui o id do avatar*
 				
 	BookController:
 
-			//Método para inserir livro na base, caso haja necessidade
-			[HttpPost("insertbook")] - https://localhost:44393/api/Book/insertbook
-			
-				json request: "title", "title_long", "isbn", "isbn13", "publisher",
-							  "edition", "date_published", "pages", "image", "language",
-							  "gender", "status", "pageCount" (pages e pagesCount são int)
+		//Método para inserir livro na base, caso haja necessidade
+		[HttpPost("insertbook")] - https://localhost:44393/api/Book/insertbook
+		
+			json request: "title", "title_long", "isbn", "isbn13", "publisher",
+						  "edition", "date_published", "pages", "image", "language",
+						  "gender"
 
 
-			//Método para buscar lista de livros por quantidade
-			[HttpGet("listbook/{n}")] - https://localhost:44393/api/Book/listbook/*colocar quantidade*
-			
-			
-			//Método para busca de livro por isbn 10		
-			[HttpGet("getbookisbn")] - https://localhost:44393/api/Book/getbookisbn
-					
-				json request: "isbn"
+		//Método para buscar lista de livros por quantidade
+		[HttpGet("listbook/{n}")] - https://localhost:44393/api/Book/listbook/*colocar quantidade*
+		
+		
+		//Método para busca de livro por isbn 10		
+		[HttpGet("getbookisbn")] - https://localhost:44393/api/Book/getbookisbn
+				
+			json request: "isbn"
 
-			//Método para busca de livro por isbn 13		
-			[HttpGet("getbookisbn13")] - https://localhost:44393/api/Book/getbookisbn13
-					
-				json request: "isbn13"
+		//Método para busca de livro por isbn 13		
+		[HttpGet("getbookisbn13")] - https://localhost:44393/api/Book/getbookisbn13
+				
+			json request: "isbn13"
 
-			//Método para busca de livro por autor
-			[HttpGet("getbookauthor")] - https://localhost:44393/api/Book/getbookauthor
-			
-				json request: "author"
+		//Método para busca de livro por autor
+		[HttpGet("getbookauthor")] - https://localhost:44393/api/Book/getbookauthor
+		
+			json request: "author"			
+				
+				
 			
 			
 				
