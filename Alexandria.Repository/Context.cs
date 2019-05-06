@@ -40,7 +40,7 @@ namespace Alexandria.Repository
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //String de Conexão do DB
-            optionsBuilder.UseSqlServer(@"Server=SPON3656;Database=db_alexandria;User Id=sa; Password = Wagner231214!;");
+            optionsBuilder.UseSqlServer(@"Server=PEDRO\SQLEXPRESS;Database=db_alexandria;User Id=sa; Password = Spectro@123;");
         }
 
 

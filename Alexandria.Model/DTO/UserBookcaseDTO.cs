@@ -6,15 +6,13 @@ using System.Text;
 
 namespace Alexandria.Model
 {
-    public class Bookcase
+    public class UserBookcaseDTO
     {
-        //public Bookcase()
-        //{
-            //Book = new HashSet<Book>();
-        //}
-
         [JsonProperty("id")]
         public Guid Id { get; set; }
+
+        [JsonProperty("idbookcase")]
+        public Guid IdBookcase { get; set; }
 
         [JsonProperty("status")]
         public string Status { get; set; }
@@ -24,7 +22,5 @@ namespace Alexandria.Model
 
         [JsonProperty("BookId")]
         public Guid? BookId { get; set; }
-        //public virtual ICollection<Book> Book { get; set; }
-
     }
 }
