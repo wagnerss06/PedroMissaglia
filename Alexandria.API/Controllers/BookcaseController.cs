@@ -19,6 +19,7 @@ namespace Alexandria.API.Controllers
         public IActionResult InsertBook([FromBody]UserBookcaseDTO userbookcase )
         {
             object eir;
+            Guid idbookcase;
             try
             {
                 BookcaseService bookcaseservice = new BookcaseService();
@@ -26,20 +27,14 @@ namespace Alexandria.API.Controllers
                 //Caso já possua bookcase
                 if (bookcaseservice.questionExistenciality(userbookcase.Id))
                 {
-                    bookcaseservice.AddBook(userbookcase);
+                    bookcaseservice.CreateBookcase(userbookcase);
                 }
+                //Caso não, cria uma com o livro recebido por parâmetro e insere ela no user 
                 else
                 {
-                    bookcaseservice.AddBook(userbookcase);
-                    eir =  bookcaseservice.createAndUpdateUserWithBookcase(userbookcase.Id);
-
-                   
+                    idbookcase = bookcaseservice.CreateBookcase(userbookcase);
+                      bookcaseservice.UpdateUserWithBookcase(userbookcase.Id, idbookcase);
                 }
-
-                bookcaseservice.AddBook(userbookcase);
-                
-                //bookservice.AddBook(book);
-
                 return Ok();
             }
             catch (Exception e)

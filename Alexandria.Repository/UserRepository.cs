@@ -174,25 +174,22 @@ namespace Alexandria.Repository
             }
         }
 
-        public object UpdateBookCase(Guid id)
+        public object UpdateBookCase(Guid userid, Guid id)
         {
-            var user = GetItem(id);
-            Guid newbookcaseID = Guid.NewGuid();
-
+            var user = GetItem(userid);
 
             using (Context context = new Context())
             {
                 if (user != null)
                 {
-                    user.BookcaseId = newbookcaseID;
+                    user.BookcaseId = id;
 
                     context.Update(user);
                     context.SaveChanges();
                 }
             }
-            return newbookcaseID;
+            return id;
         }
-
 
         //Função auxiliar para gerar string aleatório (útil)
         public string RandomString()

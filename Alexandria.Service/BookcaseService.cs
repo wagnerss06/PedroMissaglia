@@ -9,13 +9,15 @@ namespace Alexandria.Service
 {
     public class BookcaseService
     {
-        public void AddBook(UserBookcaseDTO item)
+        public Guid CreateBookcase(UserBookcaseDTO item)
         {
             BookcaseRepository repository = new BookcaseRepository();
 
             //Gerar novo ID
             item.IdBookcase = Guid.NewGuid();
             repository.Add(item);
+
+            return item.IdBookcase;
         }
 
 
@@ -42,16 +44,11 @@ namespace Alexandria.Service
             return s;
         }
 
-        public object createAndUpdateUserWithBookcase(Guid id)
+        public void UpdateUserWithBookcase(Guid userid, Guid id)
         { 
             UserRepository repository = new UserRepository();
 
-            if (repository.GetItem(id) == null)
-            {
-                throw new Exception("User does not exists");
-
-            }
-            return repository.UpdateBookCase(id);
+            repository.UpdateBookCase(userid, id);
         }
        
 
