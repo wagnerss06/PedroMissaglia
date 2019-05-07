@@ -17,17 +17,19 @@ namespace Alexandria.API.Controllers
 
         [HttpPost("insertbookinbookcase")]
         public IActionResult InsertBook([FromBody]UserBookcaseDTO userbookcase )
-        {
-            object eir;
+        {          
             Guid idbookcase;
+
             try
             {
                 BookcaseService bookcaseservice = new BookcaseService();
 
+                Guid? teste = bookcaseservice.questionExistenciality(userbookcase.Id);
+
                 //Caso já possua bookcase
-                if (bookcaseservice.questionExistenciality(userbookcase.Id))
+                if ( teste != null)
                 {
-                    bookcaseservice.CreateBookcase(userbookcase);
+                    bookcaseservice.UpdateBookcaseServ(teste, userbookcase);
                 }
                 //Caso não, cria uma com o livro recebido por parâmetro e insere ela no user 
                 else

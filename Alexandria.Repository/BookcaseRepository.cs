@@ -12,11 +12,11 @@ namespace Alexandria.Repository
         public void Add(UserBookcaseDTO item)
         {
             Bookcase item2 = new Bookcase();
-            item2.Id = item.IdBookcase;  
+            item2.Id = item.IdBookcase;
             item2.Status = item.Status;
             item2.PageCount = item.PageCount;
             item2.BookId = item.BookId;
-         
+
             using (Context context = new Context())
             {
                 context.Bookcase.Add(item2);
@@ -52,6 +52,21 @@ namespace Alexandria.Repository
         }
 
 
+        public void AddBookinBC(Guid? bookcaseid, UserBookcaseDTO item)
+        {
+            string oi = bookcaseid.ToString();
+            Bookcase item2 = new Bookcase();
+            item2.Id = Guid.Parse(oi);
+            item2.Status = item.Status;
+            item2.PageCount = item.PageCount;
+            item2.BookId = item.BookId;
+
+            using (Context context = new Context())
+            {
+                context.Bookcase.Add(item2);
+                context.SaveChanges();
+            }
+        }
 
         public List<Bookcase> GetItens(int n)
         {
