@@ -16,7 +16,6 @@
     <Compile Remove="Migrations\20190319225227_Teste.Designer.cs" />
     <Compile Remove="Migrations\20190319234801_atualizae.cs" />
     <Compile Remove="Migrations\20190319234801_atualizae.Designer.cs" />
-    <Compile Remove="Migrations\ContextModelSnapshot.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,10 +26,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Alexandria.Model\Alexandria.Model.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

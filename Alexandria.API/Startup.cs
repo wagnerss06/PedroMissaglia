@@ -38,7 +38,7 @@ namespace Alexandria.API
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             var connection = Configuration["ConexaoMySql:ConnectionString"];
-            services.AddDbContext<Context>(options => options.UseMySql(connection));
+            services.AddDbContext<Context>();
             //@"Server=SPON3656;Database=db_alexandria;User Id=sa; Password = Wagner231214!;";
             //services.AddDbContext<Context>(options => options.UseSqlServer(connection));
 
