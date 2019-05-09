@@ -13,8 +13,8 @@ namespace Alexandria.Model
             //Book = new HashSet<Book>();
         //}
 
-        [JsonProperty("id")]
-        public Guid Id { get; set; }
+        [JsonProperty("userid")]
+        public Guid UserId { get; set; }
 
         [JsonProperty("status")]
         public string Status { get; set; }

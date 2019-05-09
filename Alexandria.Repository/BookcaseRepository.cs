@@ -12,7 +12,7 @@ namespace Alexandria.Repository
         public void Add(UserBookcaseDTO item)
         {
             Bookcase item2 = new Bookcase();
-            item2.Id = item.IdBookcase;
+            item2.UserId = item.Id;
             item2.Status = item.Status;
             item2.PageCount = item.PageCount;
             item2.BookId = item.BookId;
@@ -39,7 +39,7 @@ namespace Alexandria.Repository
         {
             using (Context context = new Context())
             {
-                return context.Bookcase.Where(x => x.Id == id).FirstOrDefault();
+                return context.Bookcase.Where(x => x.UserId == id).FirstOrDefault();
             }
         }
 
@@ -56,7 +56,7 @@ namespace Alexandria.Repository
         {
             string oi = bookcaseid.ToString();
             Bookcase item2 = new Bookcase();
-            item2.Id = Guid.Parse(oi);
+            item2.UserId = Guid.Parse(oi);
             item2.Status = item.Status;
             item2.PageCount = item.PageCount;
             item2.BookId = item.BookId;

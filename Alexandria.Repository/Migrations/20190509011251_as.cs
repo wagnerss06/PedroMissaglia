@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Alexandria.Repository.Migrations
 {
-    public partial class sfs : Migration
+    public partial class @as : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,6 +47,32 @@ namespace Alexandria.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "User",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
+                    CPF = table.Column<string>(nullable: false),
+                    Birthdate = table.Column<DateTime>(nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    Gender = table.Column<string>(nullable: false),
+                    Coin = table.Column<int>(nullable: false),
+                    Password = table.Column<string>(nullable: false),
+                    AvatarId = table.Column<Guid>(nullable: true),
+                    BookcaseId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_User_Avatar_AvatarId",
+                        column: x => x.AvatarId,
+                        principalTable: "Avatar",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Book",
                 columns: table => new
                 {
@@ -86,52 +112,26 @@ namespace Alexandria.Repository.Migrations
                 name: "Bookcase",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: false),
                     Status = table.Column<string>(nullable: true),
                     PageCount = table.Column<int>(nullable: false),
-                    BookId = table.Column<Guid>(nullable: true)
+                    BookId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Bookcase", x => x.Id);
+                    table.PrimaryKey("PK_Bookcase", x => new { x.UserId, x.BookId });
                     table.ForeignKey(
                         name: "FK_Bookcase_Book_BookId",
                         column: x => x.BookId,
                         principalTable: "Book",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "User",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
-                    CPF = table.Column<string>(nullable: false),
-                    Birthdate = table.Column<DateTime>(nullable: false),
-                    Email = table.Column<string>(nullable: false),
-                    Gender = table.Column<string>(nullable: false),
-                    Coin = table.Column<int>(nullable: false),
-                    Password = table.Column<string>(nullable: false),
-                    AvatarId = table.Column<Guid>(nullable: true),
-                    BookcaseId = table.Column<Guid>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_User", x => x.Id);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_User_Avatar_AvatarId",
-                        column: x => x.AvatarId,
-                        principalTable: "Avatar",
+                        name: "FK_Bookcase_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_User_Bookcase_BookcaseId",
-                        column: x => x.BookcaseId,
-                        principalTable: "Bookcase",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -150,24 +150,19 @@ namespace Alexandria.Repository.Migrations
                 column: "BookId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Bookcase_UserId",
+                table: "Bookcase",
+                column: "UserId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_User_AvatarId",
                 table: "User",
                 column: "AvatarId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_User_BookcaseId",
-                table: "User",
-                column: "BookcaseId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "User");
-
-            migrationBuilder.DropTable(
-                name: "Avatar");
-
             migrationBuilder.DropTable(
                 name: "Bookcase");
 
@@ -175,10 +170,16 @@ namespace Alexandria.Repository.Migrations
                 name: "Book");
 
             migrationBuilder.DropTable(
+                name: "User");
+
+            migrationBuilder.DropTable(
                 name: "Authors");
 
             migrationBuilder.DropTable(
                 name: "Subjects");
+
+            migrationBuilder.DropTable(
+                name: "Avatar");
         }
     }
 }

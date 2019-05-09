@@ -15,7 +15,7 @@ namespace Alexandria.Repository.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -102,8 +102,7 @@ namespace Alexandria.Repository.Migrations
 
             modelBuilder.Entity("Alexandria.Model.Bookcase", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<Guid>("UserId");
 
                     b.Property<Guid?>("BookId");
 
@@ -111,9 +110,12 @@ namespace Alexandria.Repository.Migrations
 
                     b.Property<string>("Status");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId", "BookId");
 
                     b.HasIndex("BookId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Bookcase");
                 });
@@ -163,8 +165,6 @@ namespace Alexandria.Repository.Migrations
 
                     b.HasIndex("AvatarId");
 
-                    b.HasIndex("BookcaseId");
-
                     b.ToTable("User");
                 });
 
@@ -183,7 +183,13 @@ namespace Alexandria.Repository.Migrations
                 {
                     b.HasOne("Alexandria.Model.Book")
                         .WithMany("Bookcase")
-                        .HasForeignKey("BookId");
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Alexandria.Model.User")
+                        .WithOne("Bookcase")
+                        .HasForeignKey("Alexandria.Model.Bookcase", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Alexandria.Model.User", b =>
@@ -191,10 +197,6 @@ namespace Alexandria.Repository.Migrations
                     b.HasOne("Alexandria.Model.Avatar")
                         .WithMany("Users")
                         .HasForeignKey("AvatarId");
-
-                    b.HasOne("Alexandria.Model.Bookcase", "Bookcase")
-                        .WithMany()
-                        .HasForeignKey("BookcaseId");
                 });
 #pragma warning restore 612, 618
         }

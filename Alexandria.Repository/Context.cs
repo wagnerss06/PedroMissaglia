@@ -42,5 +42,12 @@ namespace Alexandria.Repository
             //String de Conexão do DB
             optionsBuilder.UseSqlServer(@"Server=SPON5053\SQLEXPRESS;Database=db_alexandria;User Id=sa; Password = totvs@sql@123;");
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Bookcase>().HasKey(b => new { b.UserId, b.BookId });
+
+        }
     }
 }

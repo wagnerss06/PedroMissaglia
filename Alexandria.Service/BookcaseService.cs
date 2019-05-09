@@ -36,8 +36,7 @@ namespace Alexandria.Service
 
             User iduser = repository.GetUserId(id);
 
-            if (iduser.BookcaseId == null) {
-                throw new Exception("Error");
+            if (iduser.BookcaseId == null) {             
             }
             return iduser.BookcaseId;
         }
