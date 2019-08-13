@@ -8,22 +8,24 @@ namespace Alexandria.Repository
     public class BookcaseRepository : ICRUD<Bookcase>
     {
 
-        public void Add(Bookcase item)
+        public void Add(UserBookcaseDTO item)
         {
+            Bookcase item2 = new Bookcase();
+            item2.UserId = item.Id;
+            item2.Status = item.Status;
+            item2.PageCount = item.PageCount;
+            item2.BookId = item.BookId;
+
             using (Context context = new Context())
             {
-                context.Bookcase.Add(item);
+                context.Bookcase.Add(item2);
                 context.SaveChanges();
             }
         }
 
-        public void Delete(Bookcase bookId)
+        public void Add(Bookcase item)
         {
-            using (Context context = new Context())
-            {
-                context.Bookcase.Remove(bookId);
-                context.SaveChanges();
-            }
+            throw new NotImplementedException();
         }
 
         public void Delete(Guid id)
@@ -31,11 +33,44 @@ namespace Alexandria.Repository
             throw new NotImplementedException();
         }
 
+
         public Bookcase GetItem(Guid id)
+        {
+            using (Context context = new Context())
+            {
+                return context.Bookcase.Where(x => x.UserId == id).FirstOrDefault();
+            }
+        }
+
+        public User GetUserId(Guid id)
+        {
+            using (Context context = new Context())
+            {
+                return context.User.Where(x => x.Id == id).FirstOrDefault();
+            }
+        }
+
+
+        public void AddBookinBC(Guid? bookcaseid, UserBookcaseDTO item)
+        {
+            string oi = bookcaseid.ToString();
+            Bookcase item2 = new Bookcase();
+            item2.UserId = Guid.Parse(oi);
+            item2.Status = item.Status;
+            item2.PageCount = item.PageCount;
+            item2.BookId = item.BookId;
+
+            using (Context context = new Context())
+            {
+                context.Bookcase.Add(item2);
+                context.SaveChanges();
+            }
+        }
+
+        public List<Bookcase> GetItens(int n)
         {
             throw new NotImplementedException();
         }
-
 
         public List<Bookcase> GetItens()
         {
@@ -46,5 +81,8 @@ namespace Alexandria.Repository
         {
             throw new NotImplementedException();
         }
+
+      
+
     }
 }

@@ -10,8 +10,8 @@ namespace Alexandria.Model
     {
         //Entidade a ser criada no database. tabela de relacionamento.
 
-        [JsonProperty("id")]// Número gerado automaticamente.
-        public Guid Id { get; set; }
+        [JsonProperty("userid")]
+        public Guid UserId { get; set; }
 
         [JsonProperty("UserId")]
         public Guid UserId { get; set; }

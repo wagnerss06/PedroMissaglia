@@ -22,6 +22,12 @@ namespace Alexandria.Repository
         //Criando tabela Bookcase no DB 
         public DbSet<Bookcase> Bookcase { get; set; }
 
+        //Criando tabela Authors no DB 
+        public DbSet<Authors> Authors { get; set; }
+
+        //Criando tabela Subjects no DB 
+        public DbSet<Subjects> Subjects { get; set; }
+
         //Construtores
         public Context(DbContextOptions<Context> options) : base(options)
         {
@@ -33,10 +39,15 @@ namespace Alexandria.Repository
         //Configuração da conexão com o Database SQLServer
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(@"Server=localhost;port=3306;Database=alexandria;Uid=root;Pwd=Spectro@123;");
+            //String de Conexão do DB
+            optionsBuilder.UseSqlServer(@"Server=SPON5053\SQLEXPRESS;Database=db_alexandria;User Id=sa; Password = totvs@sql@123;");
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Bookcase>().HasKey(b => new { b.UserId, b.BookId });
 
-
+        }
     }
 }
