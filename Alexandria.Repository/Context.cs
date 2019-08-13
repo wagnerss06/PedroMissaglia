@@ -33,7 +33,7 @@ namespace Alexandria.Repository
         //Configuração da conexão com o Database SQLServer
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(@"Server=alexandriabook.mysql.dbaas.com.br;Database=alexandriabook;Uid=alexandriabook;Pwd=inchelp0181;");
+            optionsBuilder.UseMySql(@"Server=localhost;port=3306;Database=alexandria;Uid=root;Pwd=Spectro@123;");
         }
 
 

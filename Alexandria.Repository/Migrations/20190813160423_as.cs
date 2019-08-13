@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Alexandria.Repository.Migrations
 {
-    public partial class dskf : Migration
+    public partial class @as : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Alexandria.Repository.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20190509015341_dskf")]
-    partial class dskf
+    [Migration("20190813160423_as")]
+    partial class @as
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
