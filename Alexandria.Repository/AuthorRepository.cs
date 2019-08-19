@@ -6,17 +6,15 @@ using System.Text;
 
 namespace Alexandria.Repository
 {
-    public class AvatarRepository : ICRUD<Avatar>
+    public class AuthorRepository : ICRUD<Authors>
     {
-        //Adição de usuário no db
-        public void Add(Avatar item)
+        public void Add(Authors item)
         {
             using (Context context = new Context())
             {
-                context.Avatar.Add(item);
+                context.Authors.Add(item);
                 context.SaveChanges();
             }
-
         }
 
         public void Delete(Guid id)
@@ -24,29 +22,31 @@ namespace Alexandria.Repository
             throw new NotImplementedException();
         }
 
-        public Avatar GetItem(Guid id)
+        public Authors GetItem(Guid id)
         {
             using (Context context = new Context())
             {
-                return context.Avatar.Where(x => x.Id == id).FirstOrDefault();
+                return context.Authors.Where(x => x.Id == id).FirstOrDefault();
             }
         }
 
-        public void Update(Guid id, Avatar item)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public List<Avatar> GetItens()
+        public Authors GetItembyName(string authorName)
         {
             using (Context context = new Context())
             {
-                return context.Avatar.ToList();
+                return context.Authors.Where(x => x.Author == authorName).FirstOrDefault();
             }
         }
 
-        Avatar ICRUD<Avatar>.GetItem(Guid id)
+        public List<Authors> GetItens()
+        {
+            using (Context context = new Context())
+            {
+                return context.Authors.ToList();
+            }
+        }
+
+        public void Update(Guid id, Authors item)
         {
             throw new NotImplementedException();
         }

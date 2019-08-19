@@ -29,14 +29,16 @@ namespace Alexandria.Service
             return repository.GetItens(n);
         }
 
-        public Guid? questionExistenciality(Guid id) {
+        public Guid? questionExistenciality(Guid id)
+        {
 
             BookcaseRepository repository = new BookcaseRepository();
 
 
             User iduser = repository.GetUserId(id);
 
-            if (iduser.BookcaseId == null) {             
+            if (iduser.BookcaseId == null)
+            {
             }
             return iduser.BookcaseId;
         }
@@ -46,16 +48,16 @@ namespace Alexandria.Service
             BookcaseRepository repository = new BookcaseRepository();
 
             repository.AddBookinBC(bookcaseid, item);
-            
+
         }
 
         public void UpdateUserWithBookcase(Guid userid, Guid id)
-        { 
+        {
             UserRepository repository = new UserRepository();
 
             repository.UpdateBookCase(userid, id);
         }
-       
+
 
 
     }

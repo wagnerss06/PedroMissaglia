@@ -1,7 +1,8 @@
 ﻿using Alexandria.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace Alexandria.Repository
 {
@@ -82,7 +83,7 @@ namespace Alexandria.Repository
             throw new NotImplementedException();
         }
 
-      
+
 
     }
 }

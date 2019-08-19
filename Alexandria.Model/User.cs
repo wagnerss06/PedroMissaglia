@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Alexandria.Model
@@ -12,7 +13,7 @@ namespace Alexandria.Model
     {
         //public User()
         //{
-         //   Bookcase = new HashSet<Bookcase>();
+        //Bookcase = new HashSet<Bookcase>();
         //}
 
         [JsonProperty("id")]
@@ -36,7 +37,7 @@ namespace Alexandria.Model
 
         [Required]
         [JsonProperty("gender")]
-        public string Gender{ get; set; }
+        public string Gender { get; set; }
 
         [JsonProperty("coin")]
         public int Coin { get; set; }
@@ -47,9 +48,11 @@ namespace Alexandria.Model
 
         [JsonProperty("AvatarId")]
         public Guid? AvatarId { get; set; }
-        public virtual Avatar Avatar { get; set; }
 
-        public virtual ICollection<Bookcase> Bookcase { get; set; }
+        [JsonProperty("BookcaseId")]
+        public Guid? BookcaseId { get; set; }
+        public virtual Bookcase Bookcase { get; set; }
+        //public virtual ICollection<Bookcase> Bookcase { get; set; }
 
     }
 }

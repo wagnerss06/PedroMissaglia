@@ -30,11 +30,16 @@ namespace Alexandria.Model
         public string ISBN { get; set; }
 
         [Required]
-        [JsonProperty("authors")] //Array de String. verificar implementação
-        public string Authors { get; set; }
+        [JsonProperty("isbn13")]
+        public string ISBN13 { get; set; }
+
+        //[Required]
+        [JsonProperty("AuthorsId")] //Array de String. verificar implementação
+        public Guid? AuthorsId { get; set; }
+        public virtual Authors Authors { get; set; }
 
         [Required]
-        [JsonProperty("editora")]
+        [JsonProperty("publisher")]
         public string Editora { get; set; }
 
         [Required]
@@ -49,59 +54,50 @@ namespace Alexandria.Model
         public string Language { get; set; }
 
         [Required]
-        [JsonProperty("páginas")]
+        [JsonProperty("pages")]
         public int Pages { get; set; }
 
         [Required]
-        [JsonProperty("gender")]
+        [JsonProperty("literary_genre")]
         public string Literary_genre { get; set; }
 
+        [JsonProperty("image")]
+        public string Image { get; set; }
+
+        [JsonProperty("SubjectsId")] //Array de String. verificar implementação
+        public Guid? SubjectsId { get; set; }
+        //public virtual Subjects Subjects { get; set; }
+
         public virtual ICollection<Bookcase> Bookcase { get; set; }
-        
+
         /*
         //Campos a serem criados após a implementacao da API
-        [Required]
-        [JsonProperty("isbn13")]
-        public string ISBN13 { get; set; }
-
+        
         [Required]
         [JsonProperty("dewey_decimal")]// Codigo bibliotecario
         public string dewey_decimal { get; set; }
-
         [Required]
         [JsonProperty("format")]
         public string Format { get; set; }
-
         [JsonProperty("msrp")]// verificar
         public string Price { get; set; }
-
         [Required]
         [JsonProperty("binding")] // Analisar
         public string Binding { get; set; }
-
         [Required]
-        [JsonProperty("dimensões")]
+        [JsonProperty("dimensions")]
         public string Dimensions { get; set; }
-
         [Required]
-        [JsonProperty("visão geral")]
+        [JsonProperty("overview")]
         public string Overview { get; set; }
-
         [Required]
         [JsonProperty("excerto")]//Resumo
         public string Excerpt { get; set; }
-
         [Required]
         [JsonProperty("synopsys")]
         public string Synopsys { get; set; }
-
-        [Required]
-        [JsonProperty("subject")] //Array de String. verificar implementação
-        public string Subject { get; set; }
-
         [JsonProperty("reviews")] //Array de String. verificar implementação. Verifica a lingua dos reviews.
         public string Reviews { get; set; }
-
         */
 
     }
