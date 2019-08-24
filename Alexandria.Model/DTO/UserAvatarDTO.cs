@@ -12,7 +12,7 @@ namespace Alexandria.Model.DTO
 
         
         [JsonProperty("avatarid")]
-        public Guid? AvatarId { get; set; }
+        public Guid AvatarId { get; set; }
         public virtual Avatar Avatar { get; set; }
     }
 }
