@@ -44,8 +44,8 @@ namespace Alexandria.API.Controllers
         }
 
         public static async Task<Volume> SearchISBN(ISBNDTO isbn)
-        {
-            var result = await service.Volumes.List(JsonConvert.ToString(isbn)).ExecuteAsync();
+        {           
+            var result = await service.Volumes.List(JsonConvert.SerializeObject(isbn)).ExecuteAsync();
             if (result != null && result != null)
             {
                 var item = result.Items.FirstOrDefault();
